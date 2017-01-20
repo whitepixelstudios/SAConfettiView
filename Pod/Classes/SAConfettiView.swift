@@ -49,9 +49,7 @@ open class SAConfettiView: UIView {
     open func startConfetti() {
         emitter = CAEmitterLayer()
 
-        emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
-        emitter.emitterShape = kCAEmitterLayerLine
-        emitter.emitterSize = CGSize(width: frame.size.width, height: 1)
+        updateEmitterPosition()
 
         var cells = [CAEmitterCell]()
         for color in colors {
@@ -61,6 +59,18 @@ open class SAConfettiView: UIView {
         emitter.emitterCells = cells
         layer.addSublayer(emitter)
         active = true
+    }
+    
+    func updateEmitterPosition() {
+        emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
+        emitter.emitterShape = kCAEmitterLayerLine
+        emitter.emitterSize = CGSize(width: frame.size.width, height: 1)
+    }
+    
+    open override var frame: CGRect {
+        didSet {
+            updateEmitterPosition()
+        }
     }
 
     open func stopConfetti() {
