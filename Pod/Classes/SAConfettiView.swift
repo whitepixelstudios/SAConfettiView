@@ -62,19 +62,18 @@ open class SAConfettiView: UIView {
     }
     
     func updateEmitterPosition() {
-        emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
+        emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: -15)
         emitter.emitterShape = kCAEmitterLayerLine
         emitter.emitterSize = CGSize(width: frame.size.width, height: 1)
     }
     
-    open override var frame: CGRect {
-        didSet {
-            updateEmitterPosition()
-        }
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        updateEmitterPosition()
     }
 
     open func stopConfetti() {
-        emitter?.birthRate = 0
+        emitter.birthRate = 0
         active = false
     }
 
