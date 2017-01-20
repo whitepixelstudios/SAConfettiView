@@ -19,7 +19,9 @@ open class SAConfettiView: UIView {
         case image(UIImage)
     }
 
-    var emitter: CAEmitterLayer!
+    lazy var emitter: CAEmitterLayer = {
+        return CAEmitterLayer()
+    }()
     open var colors: [UIColor]!
     open var intensity: Float!
     open var type: ConfettiType!
@@ -47,8 +49,6 @@ open class SAConfettiView: UIView {
     }
 
     open func startConfetti() {
-        emitter = CAEmitterLayer()
-
         updateEmitterPosition()
 
         var cells = [CAEmitterCell]()
