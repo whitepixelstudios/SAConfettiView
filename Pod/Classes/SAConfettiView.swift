@@ -117,4 +117,11 @@ open class SAConfettiView: UIView {
     open func isActive() -> Bool {
     		return self.active
     }
+    
+    open func confettiOnTimer(sec: Int){
+         self.startConfetti()
+         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(sec), execute: {
+             self.stopConfetti()
+         })
+     }
 }
